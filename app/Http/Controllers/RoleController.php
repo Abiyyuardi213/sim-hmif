@@ -60,7 +60,7 @@ class controllerRole {
             }
             exit;
         } else {
-            include './resources/views/role/roleCreate.php';
+            include './resources/views/role/roleAdd.php';
         }
     }
 

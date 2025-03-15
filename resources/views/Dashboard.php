@@ -8,19 +8,17 @@
     <link rel="icon" type="image/png" href="./public/image/hima.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Font Source Sans Pro (AdminLTE 3 Default) -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif !important;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                </li>
-            </ul>
-        </nav>
-
+        <?php include './resources/views/include/navbarSistem.php'; ?>
         <?php include './resources/views/include/sidebar.php'; ?>
 
         <!-- Content Wrapper -->
@@ -67,10 +65,7 @@
             </section>
         </div>
 
-        <!-- Footer -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2025 <a href="#">AdminLTE</a>.</strong> All rights reserved.
-        </footer>
+        <?php include './resources/views/include/footerSistem.php' ?>
     </div>
 
     <!-- Scripts -->

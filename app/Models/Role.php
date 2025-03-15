@@ -28,9 +28,9 @@ class modelRole {
 
     public function addRole($role_name, $role_description, $role_status) {
         global $conn;
-        $sql = "INSERT INTO tb_role (role_name, role_description, role_status) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO tb_role (role_name, role_description, role_status) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssii", $role_name, $role_description, $role_status);
+        $stmt->bind_param("ssi", $role_name, $role_description, $role_status);
         return $stmt->execute();
     }
 
@@ -38,13 +38,13 @@ class modelRole {
         global $conn;
         $sql = "UPDATE tb_role SET role_name = ?, role_description = ?, role_status = ? WHERE role_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssiii", $role_name, $role_description, $role_status, $role_id);
+        $stmt->bind_param("ssii", $role_name, $role_description, $role_status, $role_id);
         return $stmt->execute();
     }
 
     public function deleteRole($role_id) {
         global $conn;
-        $sqlCheck = "SELECT COUNT(*) AS count FROM tb_pegawai WHERE role_id = ?";
+        $sqlCheck = "SELECT COUNT(*) AS count FROM tb_anggota WHERE role_id = ?";
         $stmtCheck = $conn->prepare($sqlCheck);
         $stmtCheck->bind_param("i", $role_id);
         $stmtCheck->execute();
