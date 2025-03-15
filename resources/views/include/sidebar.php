@@ -34,6 +34,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="index.php?modul=pengguna&fitur=list" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Pengguna</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="index.php?modul=divisi&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-sitemap"></i>
                         <p>Divisi</p>

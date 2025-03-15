@@ -22,6 +22,12 @@ switch ($modul) {
         $controllerDivisi->handleRequestDivisi($fitur);
         break;
 
+    case 'pengguna':
+        require_once './app/Http/Controllers/PenggunaController.php';
+        $controllerPengguna = new ControllerPengguna();
+        $controllerPengguna->handleRequestPengguna($fitur);
+        break;
+
     default:
         include './services/404notFound.php';
         break;

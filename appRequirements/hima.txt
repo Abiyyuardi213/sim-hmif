@@ -1,0 +1,33 @@
+SISTEM MANAJEMEN INFORMASI HMIF ITATS
+
+TABEL PERAN :
+1. ID peran
+2. Nama peran
+3. Deskripsi peran
+4. Status peran (aktif/tidak aktif)
+
+TABEL USER (pengguna login) :
+1. ID user
+2. Nama user
+3. Email user
+4. Username user
+5. Password user
+6. Role user
+7. Foto profil user
+
+TABEL DIVISI :
+1. ID divisi
+2. Nama divisi
+3. Deskripsi divisi
+4. Status divisi
+
+TABEL ANGGOTA (anggota tidak bisa login) :
+1. ID Anggota
+2. Nama Anggota
+3. NPM anggota
+4. Email anggota
+5. Nomor telepon anggota
+6. Divisi anggota
+7. Role anggota (anggota tidak bisa login)
+8. Status anggota (aktif/cuti)
+9. Foto anggota
