@@ -16,6 +16,12 @@ switch ($modul) {
         $controllerRole->handleRequestRole($fitur);
         break;
 
+    case 'divisi':
+        require_once './app/Http/Controllers/DivisiController.php';
+        $controllerDivisi = new controllerDivisi();
+        $controllerDivisi->handleRequestDivisi($fitur);
+        break;
+
     default:
         include './services/404notFound.php';
         break;

@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="index.php?modul=divisi&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-sitemap"></i>
                         <p>Divisi</p>
                     </a>
