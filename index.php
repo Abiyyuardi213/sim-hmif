@@ -28,6 +28,12 @@ switch ($modul) {
         $controllerPengguna->handleRequestPengguna($fitur);
         break;
 
+    case 'anggota':
+        require_once './app/Http/Controllers/AnggotaController.php';
+        $controllerAnggota = new ControllerAnggota();
+        $controllerAnggota->handleRequestAnggota($fitur);
+        break;
+
     default:
         include './services/404notFound.php';
         break;

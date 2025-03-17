@@ -38,13 +38,14 @@ class ControllerPengguna {
                 } else {
                     header("Location: index.php?modul=pengguna&fitur=list");
                 }
+                break;
             //     break;
             // case 'cetak-pdf':
             //     $this->cetakPDF();
             //     break;
-            case 'login':
-                $this->loginPengguna();
-                break;
+            // case 'login':
+            //     $this->loginPengguna();
+            //     break;
             default:
                 $this->listPengguna();
                 break;
@@ -127,7 +128,7 @@ class ControllerPengguna {
             
                 if (in_array($fileExtension, $allowedExtensions)) {
                     if (move_uploaded_file($fileTmpPath, $destPath)) {
-                        if (!empty($pegawai['profile_picture']) && file_exists($uploadDir . $pengguna['profile_picture'])) {
+                        if (!empty($pengguna['profile_picture']) && file_exists($uploadDir . $pengguna['profile_picture'])) {
                             unlink($uploadDir . $pengguna['profile_picture']); // Hapus foto lama
                         }
                         $profile_picture = $fileName;
@@ -143,7 +144,7 @@ class ControllerPengguna {
 
             $isUpdated = $this->modelPengguna->updatePengguna(
                 $id_user, $nama_user, $email_user, $username,
-                $role_id, $profile_picture
+                $password, $role_id, $profile_picture
             );
 
             if ($isUpdated) {
@@ -154,7 +155,8 @@ class ControllerPengguna {
             exit();
         }
         
-        $pegawai = $this->modelPengguna->getPenggunaById($id_user);
+        $pengguna = $this->modelPengguna->getPenggunaById($id_user);
+        $roles = $this->modelRole->getRoles();
         include './resources/views/pengguna/PenggunaUpdate.php';
     }
 
@@ -182,36 +184,36 @@ class ControllerPengguna {
         include './resources/views/pengguna/PenggunaList.php';
     }
 
-    public function loginPengguna() {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
+    // public function loginPengguna() {
+    //     if (session_status() == PHP_SESSION_NONE) {
+    //         session_start();
+    //     }
     
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         $username = $_POST['username'];
+    //         $password = $_POST['password'];
     
-            $pengguna = $this->modelPengguna->loginPengguna($username, $password);
+    //         $pengguna = $this->modelPengguna->loginPengguna($username, $password);
     
-            if ($pengguna) {
-                $_SESSION['id_user'] = $pengguna['id_user'];
-                $_SESSION['nama_user'] = $pengguna['nama_user'];
-                $_SESSION['email_user'] = $pengguna['email_user'];
-                $_SESSION['username'] = $pengguna['username'];
-                $_SESSION['role_id'] = $pengguna['role_id'];
-                $_SESSION['role_name'] = $pengguna['role_name'];
-                $_SESSION['profile_picture'] = $pengguna['profile_picture'];
-                $_SESSION['login_success'] = true;
+    //         if ($pengguna) {
+    //             $_SESSION['id_user'] = $pengguna['id_user'];
+    //             $_SESSION['nama_user'] = $pengguna['nama_user'];
+    //             $_SESSION['email_user'] = $pengguna['email_user'];
+    //             $_SESSION['username'] = $pengguna['username'];
+    //             $_SESSION['role_id'] = $pengguna['role_id'];
+    //             $_SESSION['role_name'] = $pengguna['role_name'];
+    //             $_SESSION['profile_picture'] = $pengguna['profile_picture'];
+    //             $_SESSION['login_success'] = true;
     
-                header('Location: index.php?modul=dashboard&message=Login Berhasil');
-                exit();
-            } else {
-                header('Location: index.php?modul=pengguna&fitur=login&error=Username atau Password Salah');
-                exit();
-            }
-        }
-        include './resources/views/home/LoginView.php';
-    }
+    //             header('Location: index.php?modul=dashboard&message=Login Berhasil');
+    //             exit();
+    //         } else {
+    //             header('Location: index.php?modul=pengguna&fitur=login&error=Username atau Password Salah');
+    //             exit();
+    //         }
+    //     }
+    //     include './resources/views/home/LoginView.php';
+    // }
 
     // public function cetakPDF() {
     //     require_once './vendor/autoload.php'; // Pastikan DomPDF terinstal dengan Composer

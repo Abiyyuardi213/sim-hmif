@@ -91,7 +91,7 @@ class ModelPengguna {
     public function updatePengguna($id_user, $nama_user, $email_user, $username, $password, $role_id, $profile_picture = null) {
         global $conn;
     
-        $setFields = "nama_user = ?, email_user = ?, username = ?, pegawai_email = ?, role_id = ?";
+        $setFields = "nama_user = ?, email_user = ?, username = ?, role_id = ?";
         $params = [$nama_user, $email_user, $username, $role_id];
     
         if (!empty($password)) {
@@ -188,32 +188,32 @@ class ModelPengguna {
         return null;
     }
 
-    public function getPegawaiForPDF() {
-        global $conn;
+    // public function getPegawaiForPDF() {
+    //     global $conn;
         
-        $sql = "SELECT 
-                    p.pegawai_id, 
-                    p.pegawai_name, 
-                    p.username, 
-                    p.pegawai_email, 
-                    p.pegawai_phone,
-                    p.pegawai_status, 
-                    d.divisi_name, 
-                    o.daop_name, 
-                    r.role_name
-                FROM tb_pegawai p
-                LEFT JOIN tb_divisi d ON p.divisi_id = d.divisi_id
-                LEFT JOIN tb_daop o ON p.daop_id = o.daop_id
-                LEFT JOIN tb_role r ON p.role_id = r.role_id";
+    //     $sql = "SELECT 
+    //                 p.pegawai_id, 
+    //                 p.pegawai_name, 
+    //                 p.username, 
+    //                 p.pegawai_email, 
+    //                 p.pegawai_phone,
+    //                 p.pegawai_status, 
+    //                 d.divisi_name, 
+    //                 o.daop_name, 
+    //                 r.role_name
+    //             FROM tb_pegawai p
+    //             LEFT JOIN tb_divisi d ON p.divisi_id = d.divisi_id
+    //             LEFT JOIN tb_daop o ON p.daop_id = o.daop_id
+    //             LEFT JOIN tb_role r ON p.role_id = r.role_id";
         
-        $result = $conn->query($sql);
-        $pegawais = [];
+    //     $result = $conn->query($sql);
+    //     $pegawais = [];
     
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $pegawais[] = $row;
-            }
-        }
-        return $pegawais;
-    }    
+    //     if ($result->num_rows > 0) {
+    //         while ($row = $result->fetch_assoc()) {
+    //             $pegawais[] = $row;
+    //         }
+    //     }
+    //     return $pegawais;
+    // }    
 }

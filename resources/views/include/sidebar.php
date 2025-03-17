@@ -30,7 +30,7 @@
                 <li class="nav-item">
                     <a href="index.php?modul=role&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-user-shield"></i>
-                        <p>Role</p>
+                        <p>Peran Pengguna</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="index.php?modul=anggota&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Anggota</p>
                     </a>
