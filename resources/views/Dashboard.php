@@ -1,3 +1,22 @@
+<?php
+include './config/db_connect.php';
+require_once './app/Models/Role.php';
+require_once './app/Models/Pengguna.php';
+require_once './app/Models/Divisi.php';
+require_once './app/Models/Proker.php';
+
+$modelPeran = new modelRole();
+$totalPeran = $modelPeran->getTotalRole();
+
+$modelUser = new ModelPengguna();
+$totalPengguna = $modelUser->getTotalPengguna();
+
+$modelDiv = new ModelDivisi();
+$totalDivisi = $modelDiv->getTotalDivisi();
+
+$modelProker = new ModelProker();
+$totalProker = $modelProker->getTotalProker();
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -5,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMIF - Dashboard</title>
     <!-- AdminLTE & Bootstrap -->
-    <link rel="icon" type="image/png" href="./public/image/hima.png">
+    <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Font Source Sans Pro (AdminLTE 3 Default) -->
@@ -38,14 +57,14 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 col-6">
-                            <!-- small box -->
+                            <!-- Card Jumlah Pengguna -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>150</h3>
-                                    <p>Peran Pengguna</p>
+                                    <h3><?= $totalPeran; ?></h3>
+                                    <p>Total Peran</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="fas fa-users-cog"></i> <!-- Menggunakan FontAwesome -->
+                                    <i class="fas fa-user-shield"></i>
                                 </div>
                                 <a href="index.php?modul=role&fitur=list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
@@ -55,13 +74,41 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                                    <p>Pengguna</p>
+                                <h3><?= $totalPengguna; ?></h3>
+                                <p>Total Pengguna</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-users"></i>
                                 </div>
                                 <a href="index.php?modul=pengguna&fitur=list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                <h3><?= $totalDivisi; ?></h3>
+                                <p>Total Divisi</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <a href="index.php?modul=divisi&fitur=list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                <h3><?= $totalProker; ?></h3>
+                                <p>Total Proker</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <a href="index.php?modul=proker&fitur=list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -76,5 +123,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>

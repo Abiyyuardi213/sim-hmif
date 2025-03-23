@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMIF - Anggota</title>
+    <title>HMIF - Program Kerja</title>
     <link rel="icon" type="image/png" href="./public/image/hima.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -25,7 +25,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Manajemen Anggota</h1>
+                            <h1 class="m-0">Manajemen Program Kerja</h1>
                         </div>
                     </div>
                 </div>
@@ -35,9 +35,9 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Daftar Anggota Himpunan</h3>
-                            <a href="index.php?modul=anggota&fitur=create" class="btn btn-primary btn-sm ml-auto">
-                                <i class="fas fa-plus"></i> Tambah Anggota
+                            <h3 class="card-title">Daftar Program Kerja Himpunan</h3>
+                            <a href="index.php?modul=proker&fitur=create" class="btn btn-primary btn-sm ml-auto">
+                                <i class="fas fa-plus"></i> Tambah Proker
                             </a>
                         </div>
                         <div class="card-body">
@@ -45,29 +45,29 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID Anggota</th>
-                                        <th>NPM Anggota</th>
-                                        <th>Nama Anggota</th>
-                                        <th>Divisi Anggota</th>
+                                        <th>ID Proker</th>
+                                        <th>Nama Proker</th>
+                                        <th>Tanggal Proker</th>
+                                        <th>Status Proker</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($anggotas as $index => $anggota) : ?>
+                                    <?php foreach ($prokers as $index => $proker) : ?>
                                         <tr>
                                             <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($anggota['anggota_id']); ?></td>
-                                            <td><?= htmlspecialchars($anggota['anggota_npm']); ?></td>
-                                            <td><?= htmlspecialchars($anggota['anggota_nama']); ?></td>
-                                            <td><?= htmlspecialchars($anggota['divisi_name']); ?></td>
+                                            <td><?= htmlspecialchars($proker['proker_id']); ?></td>
+                                            <td><?= htmlspecialchars($proker['proker_nama']); ?></td>
+                                            <td><?= htmlspecialchars($proker['proker_tanggal']); ?></td>
+                                            <td><?= htmlspecialchars($proker['proker_status'] == 1) ? 'Terlaksana' : 'Belum Terksana'; ?></td>
                                             <td>
-                                                <a href="index.php?modul=anggota&fitur=detail&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-success btn-sm">
+                                                <a href="index.php?modul=proker&fitur=detail&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-success btn-sm">
                                                     <i class="fas fa-eye"></i> Detail
                                                 </a>
-                                                <a href="index.php?modul=anggota&fitur=edit&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-info btn-sm">
+                                                <a href="index.php?modul=proker&fitur=edit&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <a href="index.php?modul=anggota&fitur=delete&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
+                                                <a href="index.php?modul=proker&fitur=delete&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
                                             </td>

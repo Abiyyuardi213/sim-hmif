@@ -74,6 +74,14 @@ class ModelPengguna {
         return $result->fetch_assoc();
     }
 
+    public function getTotalPengguna() {
+        global $conn;
+        $sql = "SELECT COUNT(*) as total FROM tb_pengguna";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'] ?? 0;
+    }
+
     public function addPengguna($nama_user, $email_user, $username, $password, $role_id, $profile_picture = null) {
         global $conn;
     
@@ -93,6 +101,40 @@ class ModelPengguna {
     
         $setFields = "nama_user = ?, email_user = ?, username = ?, role_id = ?";
         $params = [$nama_user, $email_user, $username, $role_id];
+    
+        if (!empty($password)) {
+            $setFields .= ", password = ?";
+            $params[] = password_hash($password, PASSWORD_DEFAULT);
+        }
+    
+        if (!empty($profile_picture)) {
+            $setFields .= ", profile_picture = ?";
+            $params[] = $profile_picture;
+        }
+    
+        $params[] = $id_user;
+        $sql = "UPDATE tb_pengguna SET $setFields WHERE id_user = ?";
+    
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            die("Error preparing query: " . $conn->error);
+        }
+    
+        $types = str_repeat('s', count($params) - 1) . 'i';
+        $stmt->bind_param($types, ...$params);
+    
+        if (!$stmt->execute()) {
+            die("Error executing query: " . $stmt->error);
+        }
+    
+        return true;
+    }
+
+    public function updateLoggedInPengguna($id_user, $nama_user, $email_user, $username, $password = null, $profile_picture = null) {
+        global $conn;
+    
+        $setFields = "nama_user = ?, email_user = ?, username = ?";
+        $params = [$nama_user, $email_user, $username];
     
         if (!empty($password)) {
             $setFields .= ", password = ?";

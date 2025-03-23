@@ -9,12 +9,21 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
             <div class="image">
-                <img src="./public/image/2025_02_12_14_32_IMG_3512.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="./uploads/profile_pictures/<?php echo htmlspecialchars($_SESSION['profile_picture'] ?? 'default.png'); ?>" 
+                    class="img-circle elevation-2" 
+                    alt="User Image" 
+                    style="width: 45px; height: 45px; object-fit: cover; border: 2px solid white;">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Abiyyu Ardilian</a>
+                <a href="#" class="d-block text-white font-weight-bold">
+                    <?php echo htmlspecialchars($_SESSION['username']); ?>
+                </a>
+                <span class="badge badge-success">Online</span>  
+                <span class="d-block" style="color: #f39c12; font-size: 14px; font-weight: 600;">
+                    <?php echo htmlspecialchars($_SESSION['role_name'] ?? 'Unknown'); ?>
+                </span>
             </div>
         </div>
 
@@ -52,15 +61,27 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="index.php?modul=proker&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-tasks"></i>
                         <p>Proker</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="index.php?modul=keuangan&fitur=list" class="nav-link">
+                        <i class="nav-icon fas fa-coins"></i>
+                        <p>Keuangan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.php?modul=pengumuman&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>Pengumuman</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.php?modul=pengguna&fitur=logout" class="nav-link text-danger">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
                     </a>
                 </li>
             </ul>

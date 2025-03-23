@@ -102,26 +102,39 @@ class ModelAnggota {
         return $stmt->execute();
     }
 
-    public function updateAnggota($anggota_npm, $anggota_id, $anggota_nama, $anggota_email, $anggota_phone, $anggota_status, $divisi_id, $role_id, $profile_picture = null) {
+    public function updateAnggota($anggota_id, $anggota_nama, $anggota_email, $anggota_phone, $anggota_status, $divisi_id, $role_id, $profile_picture = null) {
         global $conn;
     
-        $setFields = "anggota_npm = ?, anggota_nama = ?, anggota_email = ?, anggota_phone = ?, anggota_status = ?, divisi_id = ?, role_id = ?";
-        $params = [$anggota_npm, $anggota_nama, $anggota_email, $anggota_phone, $anggota_status, $divisi_id, $role_id];
-    
-        if (!empty($profile_picture)) {
-            $setFields .= ", profile_picture = ?";
-            $params[] = $profile_picture;
+        if (empty($anggota_id)) {
+            die("Error: ID anggota tidak boleh kosong.");
         }
     
+        $sql = "UPDATE tb_anggota SET 
+                    anggota_nama = ?, 
+                    anggota_email = ?, 
+                    anggota_phone = ?, 
+                    anggota_status = ?, 
+                    divisi_id = ?, 
+                    role_id = ?";
+    
+        $params = [$anggota_nama, $anggota_email, $anggota_phone, $anggota_status, $divisi_id, $role_id];
+        $types = "sssiii";
+    
+        if (!empty($profile_picture)) {
+            $sql .= ", profile_picture = ?";
+            $params[] = $profile_picture;
+            $types .= "s";
+        }
+    
+        $sql .= " WHERE anggota_id = ?";
         $params[] = $anggota_id;
-        $sql = "UPDATE tb_anggota SET $setFields WHERE anggota_id = ?";
+        $types .= "i";
     
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             die("Error preparing query: " . $conn->error);
         }
     
-        $types = str_repeat('s', count($params) - 1) . 'i';
         $stmt->bind_param($types, ...$params);
     
         if (!$stmt->execute()) {

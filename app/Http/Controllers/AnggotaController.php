@@ -23,11 +23,6 @@ class ControllerAnggota {
                 break;
             case 'edit':
                 $this->editAnggota($anggota_id);
-                // if ($pegawai_id) {
-                //     $this->editPegawai($pegawai_id);
-                // } else {
-                //     header("Location: index.php?modul=pegawai&fitur=list");
-                // }
                 break;
             case 'delete':
                 $this->deleteAnggota();
@@ -105,31 +100,34 @@ class ControllerAnggota {
 
     public function editAnggota($anggota_id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $anggota_id = $_POST['anggota_id'];
-            $anggota_npm = $_POST['anggota_npm'];
+            $anggota_id = $_POST['anggota_id'] ?? null; // Pastikan ID ada di POST request
+            if (empty($anggota_id)) {
+                die("Error: ID anggota tidak boleh kosong.");
+            }
+            
             $anggota_nama = $_POST['anggota_nama'];
             $anggota_email = $_POST['anggota_email'];
             $anggota_phone = $_POST['anggota_phone'];
             $anggota_status = $_POST['anggota_status'];
             $divisi_id = $_POST['divisi_id'];
             $role_id = $_POST['role_id'];
-
+    
             $anggota = $this->modelAnggota->getAnggotaById($anggota_id);
-            $profile_picture = $anggota['profile_picture'];
-
+            $profile_picture = $anggota['profile_picture'] ?? null;
+    
             if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
                 $fileTmpPath = $_FILES['profile_picture']['tmp_name'];
                 $fileName = time() . '_' . basename($_FILES['profile_picture']['name']);
-                $uploadDir = 'uploads/foto_anggota/'; // Perbaiki path
+                $uploadDir = 'uploads/foto_anggota/';
                 $destPath = $uploadDir . $fileName;
-            
+    
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
-            
+    
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
                 $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-            
+    
                 if (in_array($fileExtension, $allowedExtensions)) {
                     if (move_uploaded_file($fileTmpPath, $destPath)) {
                         if (!empty($anggota['profile_picture']) && file_exists($uploadDir . $anggota['profile_picture'])) {
@@ -145,13 +143,13 @@ class ControllerAnggota {
                     exit();
                 }
             }
-
+    
             $isUpdated = $this->modelAnggota->updateAnggota(
-                $anggota_npm, $anggota_id, $anggota_nama, $anggota_email, $anggota_phone, 
+                $anggota_id, $anggota_nama, $anggota_email, $anggota_phone, 
                 $anggota_status, $divisi_id, $role_id, 
                 $profile_picture
             );
-
+    
             if ($isUpdated) {
                 header('Location: index.php?modul=anggota&fitur=list&message=Data Anggota Berhasil Diubah');
             } else {

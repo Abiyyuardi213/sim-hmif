@@ -2,10 +2,14 @@
 date_default_timezone_set('Asia/Jakarta');
 session_start();
 
-$modul = $_GET['modul'] ?? 'dashboard';
+$modul = $_GET['modul'] ?? 'home';
 $fitur = $_GET['fitur'] ?? 'list';
 
 switch ($modul) {
+    case 'home':
+        include './resources/views/home/home.php';
+        break;
+
     case 'dashboard':
         include './resources/views/Dashboard.php';
         break;
@@ -34,7 +38,13 @@ switch ($modul) {
         $controllerAnggota->handleRequestAnggota($fitur);
         break;
 
+    case 'proker':
+        require_once './app/Http/Controllers/ProkerController.php';
+        $controllerProker = new ControllerProker();
+        $controllerProker->handleRequestProker($fitur);
+        break;
+
     default:
-        include './services/404notFound.php';
+        include './services/404notfound.php';
         break;
 }

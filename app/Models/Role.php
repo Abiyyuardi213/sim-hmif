@@ -26,6 +26,14 @@ class modelRole {
         return $result->fetch_assoc();
     }
 
+    public function getTotalRole() {
+        global $conn;
+        $sql = "SELECT COUNT(*) as total FROM tb_role";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'] ?? 0;
+    }
+
     public function addRole($role_name, $role_description, $role_status) {
         global $conn;
         $sql = "INSERT INTO tb_role (role_name, role_description, role_status) VALUES (?, ?, ?)";

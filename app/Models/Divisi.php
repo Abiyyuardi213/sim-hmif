@@ -26,6 +26,14 @@ class ModelDivisi {
         return $result->fetch_assoc();
     }
 
+    public function getTotalDivisi() {
+        global $conn;
+        $sql = "SELECT COUNT(*) as total FROM tb_divisi";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'] ?? 0;
+    }
+
     public function addDivisi($divisi_name, $divisi_description, $divisi_status) {
         global $conn;
         $sql = "INSERT INTO tb_divisi (divisi_name, divisi_description, divisi_status) VALUES (?, ?, ?)";
