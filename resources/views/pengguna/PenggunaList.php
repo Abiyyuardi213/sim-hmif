@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMIF - Pengguna</title>
-    <link rel="icon" type="image/png" href="./public/image/hima.png">
+    <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
@@ -86,6 +86,49 @@
         <?php include './resources/views/include/footerSistem.php' ?>
     </div>
 
+    <!-- Toast Container di bawah navbar -->
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 60px; right: 10px; z-index: 1100; pointer-events: none;">
+        <div id="toastNotification" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="5000" style="pointer-events: auto;">
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle mr-2"></i>
+                <strong class="mr-auto">Notifikasi</strong>
+                <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <?php
+                if (isset($_GET['message'])) {
+                    echo htmlspecialchars($_GET['message']);
+                } elseif (isset($_GET['error'])) {
+                    echo htmlspecialchars($_GET['error']);
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Logout -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="logoutModalLabel"><i class="fas fa-sign-out-alt"></i> Konfirmasi Logout</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin keluar dari sistem?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a href="index.php?modul=pengguna&fitur=login" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
@@ -102,7 +145,23 @@
                 "autoWidth": false,
                 "responsive": true
             });
+
+            // Cek apakah ada parameter message atau error di URL
+            let urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('message') || urlParams.has('error')) {
+                let toast = $('#toastNotification');
+                toast.toast({ delay: 5000 }).toast('show');
+            }
         });
+
+        // $(document).ready(function () {
+        //     // Event untuk tombol hapus
+        //     $('.delete-role-btn').click(function () {
+        //         let penggunaId = $(this).data('pengguna-id');
+        //         let deleteUrl = "index.php?modul=pengguna&fitur=delete&pengguna_id=" + penggunaId;
+        //         $('#confirmDeleteBtn').attr('href', deleteUrl);
+        //     });
+        // });
     </script>
 </body>
 </html>

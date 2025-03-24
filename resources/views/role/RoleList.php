@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMIF - Role</title>
-    <link rel="icon" type="image/png" href="./public/image/hima.png">
+    <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
@@ -64,7 +64,10 @@
                                                 <a href="index.php?modul=role&fitur=edit&role_id=<?= $role['role_id']; ?>" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <a href="index.php?modul=role&fitur=delete&role_id=<?= $role['role_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus peran ini?');">
+                                                <a href="#" class="btn btn-danger btn-sm delete-role-btn" 
+                                                    data-toggle="modal" 
+                                                    data-target="#deleteRoleModal" 
+                                                    data-role-id="<?= $role['role_id']; ?>">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
                                             </td>
@@ -81,23 +84,36 @@
         <?php include './resources/views/include/footerSistem.php' ?>
     </div>
 
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal fade" id="deleteRoleModal" tabindex="-1" aria-labelledby="deleteRoleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteRoleModalLabel"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus peran ini? Tindakan ini tidak dapat dibatalkan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php include './services/ToastModal.php' ?>
+    <?php include './services/LogoutModal.php' ?>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#roleTable").DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            });
-        });
-    </script>
+    <script src="/resources/js/RoleScript.js"></script>
+    <script src="/resources/js/ToastScript.js"></script>
 </body>
 </html>

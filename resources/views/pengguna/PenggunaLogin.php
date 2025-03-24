@@ -15,8 +15,8 @@ $logoutSuccess = isset($_SESSION['logout_success']);
     <title>Login - HMIF ITATS</title>
     <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     
-    <!-- Bootstrap 5 CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- AdminLTE & Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
@@ -27,78 +27,55 @@ $logoutSuccess = isset($_SESSION['logout_success']);
             align-items: center;
             height: 100vh;
         }
-
-        .login-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .btn-login {
-            width: 100%;
-            background: #007bff;
-            color: white;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn-login:hover {
-            background: #0056b3;
-        }
-
-        .form-control {
-            border-radius: 5px;
-        }
-
-        .login-footer {
-            text-align: center;
-            margin-top: 15px;
+        .login-card {
+            width: 360px;
+            padding: 20px;
         }
     </style>
 </head>
-<body>
-
-    <div class="login-container">
-        <h2>Login Admin</h2>
-        <form action="index.php?modul=pengguna&fitur=login" method="POST">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
-                    <span class="input-group-text" onclick="togglePassword()" style="cursor: pointer;">
-                        <i id="eyeIcon" class="fa fa-eye"></i>
-                    </span>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card login-card shadow-lg">
+            <div class="card-body login-card-body">
+                <div class="text-center mb-4">
+                    <img src="./public/image/HMIF_1.png" alt="Logo" width="100">
                 </div>
+                <h4 class="text-center font-weight-bold">Login Admin</h4>
+                <form action="index.php?modul=pengguna&fitur=login" method="POST">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" name="username" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text" onclick="togglePassword()">
+                                <i id="eyeIcon" class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                        </div>
+                    </div>
+                </form>
+                <p class="mt-3 text-center">
+                    <a href="index.php?modul=home">Kembali ke Beranda</a>
+                </p>
             </div>
-            <button type="submit" class="btn btn-login">Masuk</button>
-            <a href="index.php?modul=home" class="btn btn-secondary mt-2 w-100">Kembali</a>
-        </form>
-
-        <div class="login-footer">
-            <p>Belum punya akun? <a href="#">Daftar</a></p>
         </div>
     </div>
-
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         function togglePassword() {
             var passwordField = document.getElementById("password");
             var eyeIcon = document.getElementById("eyeIcon");
-
+            
             if (passwordField.type === "password") {
                 passwordField.type = "text";
                 eyeIcon.classList.remove("fa-eye");
@@ -110,6 +87,5 @@ $logoutSuccess = isset($_SESSION['logout_success']);
             }
         }
     </script>
-
 </body>
 </html>

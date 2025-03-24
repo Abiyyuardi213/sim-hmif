@@ -27,7 +27,7 @@ $totalProker = $modelProker->getTotalProker();
     <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Font Source Sans Pro (AdminLTE 3 Default) -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -119,10 +119,13 @@ $totalProker = $modelProker->getTotalProker();
         <?php include './resources/views/include/footerSistem.php' ?>
     </div>
 
+    <?php include './services/ToastModal.php' ?>
+    <?php include './services/LogoutModal.php' ?>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="/resources/js/ToastScript.js"></script>
 </body>
 </html>

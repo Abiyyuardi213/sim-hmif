@@ -78,12 +78,6 @@
                         <p>Pengumuman</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?modul=pengguna&fitur=logout" class="nav-link text-danger">
-                        <i class="nav-icon fas fa-sign-out-alt"></i>
-                        <p>Logout</p>
-                    </a>
-                </li>
             </ul>
         </nav>
     </div>
