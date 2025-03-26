@@ -59,12 +59,12 @@ class ModelProker {
     public function addProker($proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status) {
         global $conn;
 
-        $jumlah_anggota = count(explode(",", $data_anggota));
+        // $jumlah_anggota = count(explode(",", $data_anggota));
         $sql = "INSERT INTO tb_proker (proker_nama, proker_deskripsi, proker_tanggal, ketua_id, sekertaris_id, jumlah_anggota, data_anggota, proker_status) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssiisis", $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status);
+        $stmt->bind_param("sssiiiss", $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status);
         
         return $stmt->execute();
     }
@@ -72,13 +72,13 @@ class ModelProker {
     public function updateProker($proker_id, $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status) {
         global $conn;
 
-        $jumlah_anggota = count(explode(",", $data_anggota));
+        // $jumlah_anggota = count(explode(",", $data_anggota));
         $sql = "UPDATE tb_proker 
                 SET proker_nama = ?, proker_deskripsi = ?, proker_tanggal = ?, ketua_id = ?, sekertaris_id = ?, jumlah_anggota = ?, data_anggota = ?, proker_status = ? 
                 WHERE proker_id = ?";
         
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssiisisi", $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status, $proker_id);
+        $stmt->bind_param("sssiiisii", $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status, $proker_id);
         
         return $stmt->execute();
     }

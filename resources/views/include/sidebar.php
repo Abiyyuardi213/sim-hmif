@@ -66,11 +66,34 @@
                         <p>Proker</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?modul=keuangan&fitur=list" class="nav-link">
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-coins"></i>
-                        <p>Keuangan</p>
+                        <p>
+                            Keuangan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?modul=keuangan&fitur=dashboard" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?modul=keuangan&fitur=pemasukkan" class="nav-link">
+                                <i class="fas fa-arrow-down nav-icon text-success"></i>
+                                <p>Pemasukan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?modul=keuangan&fitur=pengeluaran" class="nav-link">
+                                <i class="fas fa-arrow-up nav-icon text-danger"></i>
+                                <p>Pengeluaran</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="index.php?modul=pengumuman&fitur=list" class="nav-link">

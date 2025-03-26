@@ -44,6 +44,12 @@ switch ($modul) {
         $controllerProker->handleRequestProker($fitur);
         break;
 
+    case 'keuangan':
+        require_once './app/Http/Controllers/KeuanganController.php';
+        $controllerKeuangan = new ControllerKeuangan();
+        $controllerKeuangan->handleRequestKeuangan($fitur);
+        break;
+
     default:
         include './services/404notfound.php';
         break;
