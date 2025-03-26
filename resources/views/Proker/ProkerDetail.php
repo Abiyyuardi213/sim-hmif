@@ -8,19 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Source Sans Pro', sans-serif !important;
-        }
-        .profile-img {
-            width: 340px; /* Ukuran tetap */
-            height: 390px;
-            max-width: 100%; /* Agar responsif */
-            max-height: 100%;
-            object-fit: cover; /* Menyesuaikan gambar agar tidak terdistorsi */
-            border: 3px solid #ddd;
-        }
-    </style>
+    <link rel="stylesheet" href="./resources/css/FontConfig.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -66,11 +54,11 @@
                                         </tr>
                                         <tr>
                                             <th>Ketua Pelaksana</th>
-                                            <td><?= htmlspecialchars($proker['anggota_nama']); ?></td>
+                                            <td><?= htmlspecialchars($proker['ketua_nama']); ?></td>
                                         </tr>
                                         <tr>
                                             <th>Sekertaris Pelaksana</th>
-                                            <td><?= htmlspecialchars($proker['anggota_nama']); ?></td>
+                                            <td><?= htmlspecialchars($proker['sekertaris_nama']); ?></td>
                                         </tr>
                                         <tr>
                                             <th>Jumlah Anggota</th>
@@ -89,7 +77,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="index.php?modul=anggota&fitur=list" class="btn btn-secondary">
+                            <a href="index.php?modul=proker&fitur=list" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
                         </div>

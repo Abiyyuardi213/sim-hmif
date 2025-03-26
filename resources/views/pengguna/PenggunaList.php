@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Source Sans Pro', sans-serif !important;
-        }
-    </style>
+    <link rel="stylesheet" href="./resources/css/FontConfig.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -41,7 +37,7 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <table id="penggunaTable" class="table table-bordered table-striped">
+                            <table id="userTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -69,7 +65,10 @@
                                                 <a href="index.php?modul=pengguna&fitur=edit&id_user=<?= $pengguna['id_user']; ?>" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <a href="index.php?modul=pengguna&fitur=delete&id_user=<?= $pengguna['id_user']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
+                                                <a href="#" class="btn btn-danger btn-sm delete-user-btn" 
+                                                    data-toggle="modal" 
+                                                    data-target="#deleteUserModal" 
+                                                    data-user-id="<?= $pengguna['id_user']; ?>">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
                                             </td>
@@ -86,82 +85,36 @@
         <?php include './resources/views/include/footerSistem.php' ?>
     </div>
 
-    <!-- Toast Container di bawah navbar -->
-    <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 60px; right: 10px; z-index: 1100; pointer-events: none;">
-        <div id="toastNotification" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="5000" style="pointer-events: auto;">
-            <div class="toast-header bg-success text-white">
-                <i class="fas fa-check-circle mr-2"></i>
-                <strong class="mr-auto">Notifikasi</strong>
-                <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="toast-body">
-                <?php
-                if (isset($_GET['message'])) {
-                    echo htmlspecialchars($_GET['message']);
-                } elseif (isset($_GET['error'])) {
-                    echo htmlspecialchars($_GET['error']);
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Konfirmasi Logout -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="logoutModalLabel"><i class="fas fa-sign-out-alt"></i> Konfirmasi Logout</h5>
+                    <h5 class="modal-title" id="deleteUserModalLabel"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin keluar dari sistem?
+                    Apakah Anda yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <a href="index.php?modul=pengguna&fitur=login" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php include './services/ToastModal.php' ?>
+    <?php include './services/LogoutModal.php' ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#penggunaTable").DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            });
-
-            // Cek apakah ada parameter message atau error di URL
-            let urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('message') || urlParams.has('error')) {
-                let toast = $('#toastNotification');
-                toast.toast({ delay: 5000 }).toast('show');
-            }
-        });
-
-        // $(document).ready(function () {
-        //     // Event untuk tombol hapus
-        //     $('.delete-role-btn').click(function () {
-        //         let penggunaId = $(this).data('pengguna-id');
-        //         let deleteUrl = "index.php?modul=pengguna&fitur=delete&pengguna_id=" + penggunaId;
-        //         $('#confirmDeleteBtn').attr('href', deleteUrl);
-        //     });
-        // });
-    </script>
+    <script src="./resources/js/PenggunaScript.js"></script>
+    <script src="./resources/js/ToastScript.js"></script>
 </body>
 </html>

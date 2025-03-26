@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Anggota</title>
+    <title>Tambah Proker</title>
     <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Tambah Anggota Baru</h1>
+                            <h1 class="m-0">Tambah Program Kerja</h1>
                         </div>
                     </div>
                 </div>
@@ -33,69 +33,66 @@
                             <?php endif; ?>
                             <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="anggota_npm">NPM Anggota</label>
-                                    <input type="text" class="form-control" name="anggota_npm" required>
+                                    <label for="proker_nama">Nama Program Kerja</label>
+                                    <input type="text" class="form-control" name="proker_nama" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anggota_nama">Nama Anggota</label>
-                                    <input type="text" class="form-control" name="anggota_nama" required>
+                                    <label for="proker_deskripsi">Deskripsi</label>
+                                    <textarea class="form-control" name="proker_deskripsi" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anggota_email">Email Anggota</label>
-                                    <input type="text" class="form-control" name="anggota_email" required>
+                                    <label for="proker_tanggal">Tanggal Pelaksanaan</label>
+                                    <input type="date" class="form-control" name="proker_tanggal" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anggota_phone">No. Telp Anggota</label>
-                                    <input type="text" class="form-control" name="anggota_phone" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="divisi_id">Divisi Anggota</label>
+                                    <label for="ketua_id">Ketua Pelaksana</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                                         </div>
-                                        <select class="form-control" id="divisi_id" name="divisi_id" required>
-                                            <option value="" disabled selected>Pilih Divisi</option>
-                                            <?php foreach ($divisis as $divisi) { ?>
-                                                <option value="<?= htmlspecialchars($divisi['divisi_id']) ?>">
-                                                    <?= htmlspecialchars($divisi['divisi_name']) ?>
+                                        <select class="form-control" id="ketua_id" name="ketua_id" required>
+                                            <option value="" disabled selected>Pilih ketua pelaksana</option>
+                                            <?php foreach ($anggotas as $anggota) { ?>
+                                                <option value="<?= htmlspecialchars($anggota['anggota_id']) ?>">
+                                                    <?= htmlspecialchars($anggota['anggota_id']) ?> | <?= htmlspecialchars($anggota['anggota_nama']) ?>
                                                 </option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="role_id">Peran Anggota</label>
+                                    <label for="sekertaris_id">Sekertaris Pelaksana</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                                         </div>
-                                        <select class="form-control" id="role_id" name="role_id" required>
-                                            <option value="" disabled selected>Pilih Peran</option>
-                                            <?php foreach ($roles as $role) { ?>
-                                                <option value="<?= htmlspecialchars($role['role_id']) ?>">
-                                                    <?= htmlspecialchars($role['role_name']) ?>
+                                        <select class="form-control" id="sekertaris_id" name="sekertaris_id" required>
+                                            <option value="" disabled selected>Pilih sekertaris pelaksana</option>
+                                            <?php foreach ($anggotas as $anggota) { ?>
+                                                <option value="<?= htmlspecialchars($anggota['anggota_id']) ?>">
+                                                    <?= htmlspecialchars($anggota['anggota_id']) ?> | <?= htmlspecialchars($anggota['anggota_nama']) ?>
                                                 </option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anggota_status">Status</label>
-                                    <select class="form-control" name="anggota_status">
-                                        <option value="1">Aktif</option>
-                                        <option value="0">Nonaktif</option>
+                                    <label for="jumlah_anggota">Jumlah Anggota Program Kerja</label>
+                                    <input type="number" class="form-control" name="jumlah_anggota" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_anggota">Data Anggota</label>
+                                    <textarea class="form-control" name="data_anggota" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="proker_status">Status</label>
+                                    <select class="form-control" name="proker_status">
+                                        <option value="1">Sukses Terlaksana</option>
+                                        <option value="0">Belum Terlaksana</option>
                                     </select>
                                 </div>
-                                <!-- Input Upload Profile Picture -->
-                                <div class="form-group">
-                                    <label for="profile_picture">Foto Profil</label>
-                                    <input type="file" class="form-control-file" id="profile_picture" name="profile_picture" accept="image/*" onchange="previewImage(event)">
-                                    <br>
-                                    <img id="imagePreview" src="#" alt="Pratinjau Gambar" style="display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                                </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-                                <a href="index.php?modul=anggota&fitur=list" class="btn btn-secondary">Batal</a>
+                                <a href="index.php?modul=proker&fitur=list" class="btn btn-secondary">Batal</a>
                             </form>
                         </div>
                     </div>
@@ -109,17 +106,5 @@
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-
-    <script>
-        function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function(){
-                var output = document.getElementById('imagePreview');
-                output.src = reader.result;
-                output.style.display = "block";
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
 </body>
 </html>

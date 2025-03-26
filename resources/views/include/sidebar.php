@@ -18,7 +18,7 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block text-white font-weight-bold">
-                    <?php echo htmlspecialchars($_SESSION['username']); ?>
+                    <?php echo htmlspecialchars($_SESSION['nama_user']); ?>
                 </a>
                 <span class="badge badge-success">Online</span>  
                 <span class="d-block" style="color: #f39c12; font-size: 14px; font-weight: 600;">

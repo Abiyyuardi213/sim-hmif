@@ -56,7 +56,7 @@ class ModelProker {
         return $row['total'] ?? 0;
     }
 
-    public function addProker($proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $data_anggota, $proker_status) {
+    public function addProker($proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status) {
         global $conn;
 
         $jumlah_anggota = count(explode(",", $data_anggota));
@@ -69,10 +69,10 @@ class ModelProker {
         return $stmt->execute();
     }
 
-    public function updateProker($proker_id, $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $data_anggota, $proker_status) {
+    public function updateProker($proker_id, $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status) {
         global $conn;
 
-        $jumlah_anggota = count(explode(",", $data_anggota)); // Hitung jumlah anggota dari daftar ID
+        $jumlah_anggota = count(explode(",", $data_anggota));
         $sql = "UPDATE tb_proker 
                 SET proker_nama = ?, proker_deskripsi = ?, proker_tanggal = ?, ketua_id = ?, sekertaris_id = ?, jumlah_anggota = ?, data_anggota = ?, proker_status = ? 
                 WHERE proker_id = ?";

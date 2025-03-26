@@ -51,16 +51,18 @@ class ControllerProker {
 
     public function createProker() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            error_log(print_r($_POST, true));
             $proker_nama = $_POST['proker_nama'] ?? '';
             $proker_deskripsi = $_POST['proker_deskripsi'] ?? '';
             $proker_tanggal = $_POST['proker_tanggal'] ?? '';
             $ketua_id = $_POST['ketua_id'] ?? '';
             $sekertaris_id = $_POST['sekertaris_id'] ?? '';
+            $jumlah_anggota = $_POST['jumlah_anggota'] ?? '';
             $data_anggota = $_POST['data_anggota'] ?? '';
             $proker_status = $_POST['proker_status'] ?? 0;
 
             if (!empty($proker_nama) && !empty($proker_deskripsi) && !empty($proker_tanggal)) {
-                $success = $this->modelProker->addProker($proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $data_anggota, $proker_status);
+                $success = $this->modelProker->addProker($proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status);
                 if ($success) {
                     header("Location: index.php?modul=proker&fitur=list&message=Data Berhasil Ditambahkan");
                     exit();
@@ -71,11 +73,13 @@ class ControllerProker {
                 $error = "Harap isi semua data!";
             }
         }
+        $anggotas = $this->modelAnggota->getAnggotas();
         include './resources/views/proker/ProkerAdd.php';
     }
 
     public function editProker($proker_id) {
         $proker = $this->modelProker->getProkerById($proker_id);
+        $anggotas = $this->modelAnggota->getAnggotas(); 
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $proker_nama = $_POST['proker_nama'] ?? '';
@@ -83,11 +87,12 @@ class ControllerProker {
             $proker_tanggal = $_POST['proker_tanggal'] ?? '';
             $ketua_id = $_POST['ketua_id'] ?? '';
             $sekertaris_id = $_POST['sekertaris_id'] ?? '';
+            $jumlah_anggota = $_POST['jumlah_anggota'] ?? '';
             $data_anggota = $_POST['data_anggota'] ?? '';
             $proker_status = $_POST['proker_status'] ?? 0;
 
             if (!empty($proker_nama) && !empty($proker_deskripsi) && !empty($proker_tanggal)) {
-                $success = $this->modelProker->updateProker($proker_id, $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $data_anggota, $proker_status);
+                $success = $this->modelProker->updateProker($proker_id, $proker_nama, $proker_deskripsi, $proker_tanggal, $ketua_id, $sekertaris_id, $jumlah_anggota, $data_anggota, $proker_status);
                 if ($success) {
                     header("Location: index.php?modul=proker&fitur=list&message=Data Berhasil Diperbarui");
                     exit();
@@ -114,6 +119,11 @@ class ControllerProker {
 
     public function detailProker($proker_id) {
         $proker = $this->modelProker->getDetailProker($proker_id);
+        $ketua = $this->modelAnggota->getAnggotaById($proker['ketua_id']);
+        $sekretaris = $this->modelAnggota->getAnggotaById($proker['sekertaris_id']);
+
+        $proker['ketua_nama'] = $ketua['anggota_nama'] ?? 'Tidak diketahui';
+        $proker['sekretaris_nama'] = $sekretaris['anggota_nama'] ?? 'Tidak diketahui';
         include './resources/views/proker/ProkerDetail.php';
     }
 
