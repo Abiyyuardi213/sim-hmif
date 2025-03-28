@@ -50,6 +50,14 @@ class ModelDivisi {
         return $stmt->execute();
     }
 
+    public function updateDivisiStatus($divisi_id, $divisi_status) {
+        global $conn;
+        $sql = "UPDATE tb_divisi SET divisi_status = ? WHERE divisi_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $divisi_status, $divisi_id);
+        return $stmt->execute();
+    }
+
     public function deteteDivisi($divisi_id) {
         global $conn;
         $sqlCheck = "SELECT COUNT(*) AS count FROM tb_anggota WHERE divisi_id = ?";

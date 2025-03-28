@@ -55,7 +55,13 @@
                                             <td><?= htmlspecialchars($proker['proker_id']); ?></td>
                                             <td><?= htmlspecialchars($proker['proker_nama']); ?></td>
                                             <td><?= htmlspecialchars($proker['proker_tanggal']); ?></td>
-                                            <td><?= htmlspecialchars($proker['proker_status'] == 1) ? 'Terlaksana' : 'Belum Terksana'; ?></td>
+                                            <td class="text-center">
+                                                <?php if ($proker['proker_status'] == 1) : ?>
+                                                    <span class="badge badge-success">Terlaksana</span>
+                                                <?php else : ?>
+                                                    <span class="badge badge-danger">Belum Terlaksana</span>
+                                                <?php endif; ?>
+                                            </td>
                                             <td>
                                                 <a href="index.php?modul=proker&fitur=detail&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-success btn-sm">
                                                     <i class="fas fa-eye"></i> Detail

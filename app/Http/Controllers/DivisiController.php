@@ -18,6 +18,9 @@ class controllerDivisi {
             case 'edit':
                 $this->updateDivisi($divisi_id);
                 break;
+            case 'update-status':
+                $this->updateDivisiStatus();
+                break;
             case 'delete':
                 $this->deleteDivisi($divisi_id);
                 break;
@@ -76,6 +79,27 @@ class controllerDivisi {
         } else {
             $divisi = $this->model->getDivisiById($divisi_id);
             include './resources/views/divisi/DivisiUpdate.php';
+        }
+    }
+
+    public function updateDivisiStatus() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $divisi_id = $_POST['divisi_id'] ?? null;
+            $divisi_status = $_POST['divisi_status'] ?? null;
+    
+            if ($divisi_id === null || $divisi_status === null) {
+                echo json_encode(["success" => false, "message" => "Data tidak valid"]);
+                exit;
+            }
+    
+            $isUpdated = $this->model->updateDivisiStatus((int)$divisi_id, (int)$divisi_status);
+    
+            if ($isUpdated) {
+                echo json_encode(["success" => true, "message" => "Status berhasil diperbarui"]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Gagal memperbarui status"]);
+            }
+            exit;
         }
     }
 

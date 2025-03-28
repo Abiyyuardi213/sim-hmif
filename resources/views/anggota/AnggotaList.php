@@ -66,7 +66,7 @@
                                                 <a href="#" class="btn btn-danger btn-sm delete-anggota-btn" 
                                                     data-toggle="modal" 
                                                     data-target="#deleteAnggotaModal" 
-                                                    data-role-id="<?= $anggota['anggota_id']; ?>">
+                                                    data-anggota-id="<?= $anggota['anggota_id']; ?>">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
                                             </td>
@@ -81,6 +81,27 @@
         </div>
 
         <?php include './resources/views/include/footerSistem.php' ?>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal fade" id="deleteAnggotaModal" tabindex="-1" aria-labelledby="deleteAnggotaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteAnggotaModalLabel"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus anggota ini? Tindakan ini tidak dapat dibatalkan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                </div>
+            </div>
+        </div>
     </div>
     
     <?php include './services/ToastModal.php' ?>

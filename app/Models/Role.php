@@ -50,6 +50,14 @@ class modelRole {
         return $stmt->execute();
     }
 
+    public function updateRoleStatus($role_id, $role_status) {
+        global $conn;
+        $sql = "UPDATE tb_role SET role_status = ? WHERE role_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $role_status, $role_id);
+        return $stmt->execute();
+    }
+
     public function deleteRole($role_id) {
         global $conn;
         $sqlCheck = "SELECT COUNT(*) AS count FROM tb_anggota WHERE role_id = ?";

@@ -38,6 +38,30 @@ class ModelKeuangan {
         return $data['total'] ?? 0; // Mengembalikan total pemasukkan sebagai angka
     }
 
+    public function getDetailPemasukkan($keuangan_id) {
+        global $conn;
+        
+        $sql = "SELECT 
+                    k.keuangan_id,
+                    k.jenis_transaksi, 
+                    k.deskripsi,
+                    k.jumlah, 
+                    k.tanggal_transaksi,
+                    a.anggota_id,
+                    a.anggota_nama,
+                    k.sumber_dana, 
+                    k.kategori
+                FROM tb_keuangan k
+                LEFT JOIN tb_anggota a ON a.anggota_id = k.anggota_id
+                WHERE k.keuangan_id = ?";
+    
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $keuangan_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }   
+
     public function getPengeluaran() {
         global $conn;
         $sql = "SELECT * FROM tb_keuangan WHERE jenis_transaksi = 'pengeluaran'";

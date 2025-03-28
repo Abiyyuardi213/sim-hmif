@@ -31,10 +31,10 @@ class ControllerKeuangan {
             case 'pengeluaran':
                 $this->listPengeluaran();
                 break;
-            case 'detail':
+            case 'detail-pemasukkan':
                 $keuangan_id = $_GET['keuangan_id'] ?? null;
                 if ($keuangan_id) {
-                    $this->detailKeuangan($keuangan_id);
+                    $this->detailPemasukkan($keuangan_id);
                 } else {
                     header("Location: index.php?modul=keuangan&fitur=list&message=ID tidak valid");
                 }
@@ -113,8 +113,8 @@ class ControllerKeuangan {
         include './resources/views/keuangan/KeuanganList.php';
     }
 
-    public function detailKeuangan($keuangan_id) {
-        $pemasukkan = $this->modelKeuangan->getKeuanganById($keuangan_id);
+    public function detailPemasukkan($keuangan_id) {
+        $pemasukkan = $this->modelKeuangan->getDetailPemasukkan($keuangan_id);
         if (!$pemasukkan) {
             header("Location: index.php?modul=keuangan&fitur=list&message=Data tidak ditemukan");
             exit();

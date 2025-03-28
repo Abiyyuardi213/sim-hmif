@@ -10,6 +10,43 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./resources/css/FontConfig.css">
+    <style>
+        .toggle-status {
+            width: 50px;
+            height: 24px;
+            appearance: none;
+            background: #ddd;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-status:checked {
+            background: linear-gradient(90deg, #28a745, #2ecc71);
+        }
+
+        .toggle-status::before {
+            content: "❌";
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            text-align: center;
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        .toggle-status:checked::before {
+            content: "✔️";
+            transform: translateX(26px);
+            color: #28a745;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -55,8 +92,12 @@
                                             <td><?= htmlspecialchars($role['role_id']); ?></td>
                                             <td><?= htmlspecialchars($role['role_name']); ?></td>
                                             <td><?= htmlspecialchars($role['role_description']); ?></td>
-                                            <td><?= ($role['role_status'] == 1) ? 'Aktif' : 'Nonaktif'; ?></td>
-                                            <td>
+                                            <td class="text-center">
+                                                <input type="checkbox" class="toggle-status" 
+                                                    data-role-id="<?= $role['role_id']; ?>"
+                                                    <?= $role['role_status'] == 1 ? 'checked' : ''; ?>>
+                                            </td>
+                                            <td class="text-center">
                                                 <a href="index.php?modul=role&fitur=edit&role_id=<?= $role['role_id']; ?>" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
@@ -111,5 +152,29 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="/resources/js/RoleScript.js"></script>
     <script src="/resources/js/ToastScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".toggle-status").change(function () {
+                let roleId = $(this).data("role-id");
+                let status = $(this).prop("checked") ? 1 : 0;
+                let toast = $("#toastNotification");
+
+                $.post("index.php?modul=role&fitur=update-status", 
+                    { role_id: roleId, role_status: status }, 
+                    function (response) {
+                        let res = JSON.parse(response);
+                        if (res.success) {
+                            $(".toast-body").text(res.message);
+                            toast.toast({ autohide: true, delay: 3000 }).toast("show");
+                        } else {
+                            alert("Gagal memperbarui status.");
+                        }
+                    }
+                ).fail(function () {
+                    alert("Terjadi kesalahan dalam mengubah status.");
+                });
+            });
+        });
+    </script>
 </body>
 </html>

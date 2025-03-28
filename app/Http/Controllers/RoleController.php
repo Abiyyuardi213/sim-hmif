@@ -22,6 +22,9 @@ class controllerRole {
                     header('Location: index.php?modul=role&fitur=list');
                 }
                 break;
+            case 'update-status':
+                $this->updateRoleStatus();
+                break;
             case 'delete':
                 if ($role_id) {
                     $this->deleteRole((int)$role_id);
@@ -85,6 +88,27 @@ class controllerRole {
                 exit;
             }
             include './resources/views/role/roleUpdate.php';
+        }
+    }
+
+    public function updateRoleStatus() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $role_id = $_POST['role_id'] ?? null;
+            $role_status = $_POST['role_status'] ?? null;
+    
+            if ($role_id === null || $role_status === null) {
+                echo json_encode(["success" => false, "message" => "Data tidak valid"]);
+                exit;
+            }
+    
+            $isUpdated = $this->model->updateRoleStatus((int)$role_id, (int)$role_status);
+    
+            if ($isUpdated) {
+                echo json_encode(["success" => true, "message" => "Status berhasil diperbarui"]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Gagal memperbarui status"]);
+            }
+            exit;
         }
     }
 

@@ -53,18 +53,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anggota_id">Diterima Oleh</label>
+                                    <label for="anggota_id">Anggota yang Melakukan Pembayaran</label>
                                     <select class="form-control" name="anggota_id" required>
                                         <option value="">Pilih Anggota</option>
                                         <?php foreach ($anggota as $a) { ?>
                                             <option value="<?= htmlspecialchars($a['anggota_id']) ?>">
-                                                <?= htmlspecialchars($a['anggota_nama']) ?>
+                                                <?= htmlspecialchars($a['anggota_npm']) ?> | <?= htmlspecialchars($a['anggota_nama']) ?>
                                             </option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-                                <a href="index.php?modul=keuangan&fitur=list" class="btn btn-secondary">Batal</a>
+                                <a href="index.php?modul=keuangan&fitur=pemasukkan" class="btn btn-secondary">Batal</a>
                             </form>
                         </div>
                     </div>

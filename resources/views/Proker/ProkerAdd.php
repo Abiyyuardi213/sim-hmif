@@ -54,7 +54,7 @@
                                             <option value="" disabled selected>Pilih ketua pelaksana</option>
                                             <?php foreach ($anggotas as $anggota) { ?>
                                                 <option value="<?= htmlspecialchars($anggota['anggota_id']) ?>">
-                                                    <?= htmlspecialchars($anggota['anggota_id']) ?> | <?= htmlspecialchars($anggota['anggota_nama']) ?>
+                                                    <?= htmlspecialchars($anggota['anggota_npm']) ?> | <?= htmlspecialchars($anggota['anggota_nama']) ?>
                                                 </option>
                                             <?php } ?>
                                         </select>
@@ -70,7 +70,7 @@
                                             <option value="" disabled selected>Pilih sekertaris pelaksana</option>
                                             <?php foreach ($anggotas as $anggota) { ?>
                                                 <option value="<?= htmlspecialchars($anggota['anggota_id']) ?>">
-                                                    <?= htmlspecialchars($anggota['anggota_id']) ?> | <?= htmlspecialchars($anggota['anggota_nama']) ?>
+                                                    <?= htmlspecialchars($anggota['anggota_npm']) ?> | <?= htmlspecialchars($anggota['anggota_nama']) ?>
                                                 </option>
                                             <?php } ?>
                                         </select>

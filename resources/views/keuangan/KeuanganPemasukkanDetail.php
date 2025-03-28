@@ -51,6 +51,10 @@
                                     <td><?= htmlspecialchars($pemasukkan['sumber_dana']); ?></td>
                                 </tr>
                                 <tr>
+                                    <th>Nama Anggota</th>
+                                    <td><?= htmlspecialchars($pemasukkan['anggota_nama']); ?></td>
+                                </tr>
+                                <tr>
                                     <th>Kategori</th>
                                     <td><?= htmlspecialchars($pemasukkan['kategori']); ?></td>
                                 </tr>
