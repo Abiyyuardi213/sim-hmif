@@ -78,7 +78,7 @@
                         <li class="nav-item">
                             <a href="index.php?modul=keuangan&fitur=dashboard" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>Dashboard</p>
+                                <p>Dashboard Keuangan</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -91,6 +91,12 @@
                             <a href="index.php?modul=keuangan&fitur=pengeluaran" class="nav-link">
                                 <i class="fas fa-arrow-up nav-icon text-danger"></i>
                                 <p>Pengeluaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?modul=keuangan&fitur=list" class="nav-link">
+                                <i class="fas fa-money-bill-wave nav-icon text-success"></i>
+                                <p>List Keuangan</p>
                             </a>
                         </li>
                     </ul>

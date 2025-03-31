@@ -4,6 +4,16 @@ require_once './app/Models/Keuangan.php';
 
 $modelKeuangan = new modelKeuangan();
 $totalPemasukkan = $modelKeuangan->getTotalPemasukkan();
+$totalPengeluaran = $modelKeuangan->getTotalPengeluaran();
+$totalSaldo = $modelKeuangan->getTotalSaldo();
+
+if ($totalSaldo > 100000) {
+    $saldoColor = 'bg-success'; 
+} elseif ($totalSaldo >= -100000 && $totalSaldo <= 100000) {
+    $saldoColor = 'bg-warning';
+} else {
+    $saldoColor = 'bg-danger';
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -50,6 +60,34 @@ $totalPemasukkan = $modelKeuangan->getTotalPemasukkan();
                                     <i class="fas fa-wallet"></i>
                                 </div>
                                 <a href="index.php?modul=keuangan&fitur=pemasukkan" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3><?= number_format((float)$totalPengeluaran, 0, ',', '.'); ?></h3>
+                                    <p>Total Pengeluaran</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <a href="index.php?modul=keuangan&fitur=pengeluaran" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box <?= $saldoColor; ?>">
+                                <div class="inner">
+                                    <h3>Rp<?= number_format((float)$totalSaldo, 0, ',', '.'); ?></h3>
+                                    <p>Total Saldo</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <a href="index.php?modul=keuangan&fitur=list" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

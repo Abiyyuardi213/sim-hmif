@@ -32,6 +32,14 @@ class ModelAnggota {
         return $anggotas;
     }
 
+    public function getTotalAnggota() {
+        global $conn;
+        $sql = "SELECT COUNT(*) as total FROM tb_anggota";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'] ?? 0;
+    }
+
     public function getAnggotaById($anggota_id) {
         global $conn;
         

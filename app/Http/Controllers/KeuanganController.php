@@ -31,12 +31,32 @@ class ControllerKeuangan {
             case 'pengeluaran':
                 $this->listPengeluaran();
                 break;
+            case 'detail':
+                $keuangan_id = $_GET['keuangan_id'] ?? null;
+                if ($keuangan_id) {
+                    $this->detailKeuangan($keuangan_id);
+                } else {
+                    header("Location: index.php?modul=keuangan&fitur=list&message=ID tidak valid");
+                }
+                break;
             case 'detail-pemasukkan':
                 $keuangan_id = $_GET['keuangan_id'] ?? null;
                 if ($keuangan_id) {
                     $this->detailPemasukkan($keuangan_id);
                 } else {
                     header("Location: index.php?modul=keuangan&fitur=list&message=ID tidak valid");
+                }
+                break;
+            case 'hapus-pemasukkan':
+                $keuangan_id = $_GET['keuangan_id'] ?? null;
+                if ($keuangan_id) {
+                    $this->hapusPemasukkan($keuangan_id);
+                }
+                break;
+            case 'hapus-pengeluaran':
+                $keuangan_id = $_GET['keuangan_id'] ?? null;
+                if ($keuangan_id) {
+                    $this->hapusPengeluaran($keuangan_id);
                 }
                 break;
             case 'hapus':
@@ -91,7 +111,7 @@ class ControllerKeuangan {
 
             try {
                 if ($this->modelKeuangan->addPengeluaran($deskripsi, $jumlah, $anggota_id, $sumber_dana, $kategori)) {
-                    header("Location: index.php?modul=keuangan&fitur=list&message=Pengeluaran Berhasil Ditambahkan");
+                    header("Location: index.php?modul=keuangan&fitur=pengeluaran&message=Pengeluaran Berhasil Ditambahkan");
                 } else {
                     header("Location: index.php?modul=keuangan&fitur=tambah-pengeluaran&message=Gagal Menambahkan Pengeluaran");
                 }
@@ -100,6 +120,7 @@ class ControllerKeuangan {
             }
             exit();
         }
+        $anggota = $this->modelAnggota->getAllAnggota();
         include './resources/views/keuangan/KeuanganAddPengeluaran.php';
     }
 
@@ -111,6 +132,15 @@ class ControllerKeuangan {
             $keuangan = $this->modelKeuangan->getKeuangans();
         }
         include './resources/views/keuangan/KeuanganList.php';
+    }
+
+    public function detailKeuangan($keuangan_id) {
+        $pemasukkan = $this->modelKeuangan->getDetailKeuangan($keuangan_id);
+        if (!$pemasukkan) {
+            header("Location: index.php?modul=keuangan&fitur=list&message=Data tidak ditemukan");
+            exit();
+        }
+        include './resources/views/keuangan/KeuanganDetail.php';
     }
 
     public function detailPemasukkan($keuangan_id) {
@@ -131,6 +161,32 @@ class ControllerKeuangan {
             }
         } catch (Exception $e) {
             header("Location: index.php?modul=keuangan&fitur=list&message=" . $e->getMessage());
+        }
+        exit();
+    }
+
+    public function hapusPemasukkan($keuangan_id) {
+        try {
+            if ($this->modelKeuangan->deleteKeuangan($keuangan_id)) {
+                header("Location: index.php?modul=keuangan&fitur=pemasukkan&message=Pemasukkan Berhasil Dihapus");
+            } else {
+                header("Location: index.php?modul=keuangan&fitur=pemasukkan&message=Gagal Menghapus Pengeluaran");
+            }
+        } catch (Exception $e) {
+            header("Location: index.php?modul=keuangan&fitur=pengeluaran&message=" . $e->getMessage());
+        }
+        exit();
+    }
+
+    public function hapusPengeluaran($keuangan_id) {
+        try {
+            if ($this->modelKeuangan->deleteKeuangan($keuangan_id)) {
+                header("Location: index.php?modul=keuangan&fitur=pengeluaran&message=Pengeluaran Berhasil Dihapus");
+            } else {
+                header("Location: index.php?modul=keuangan&fitur=pengeluaran&message=Gagal Menghapus Pengeluaran");
+            }
+        } catch (Exception $e) {
+            header("Location: index.php?modul=keuangan&fitur=pengeluaran&message=" . $e->getMessage());
         }
         exit();
     }

@@ -62,7 +62,10 @@
                                                 <a href="index.php?modul=keuangan&fitur=detail-pemasukkan&keuangan_id=<?= $data['keuangan_id']; ?>" class="btn btn-success btn-sm">
                                                     <i class="fas fa-eye"></i> Detail
                                                 </a>
-                                                <a href="index.php?modul=keuangan&fitur=hapus&keuangan_id=<?= $data['keuangan_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pemasukkan ini?');">
+                                                <a href="#" class="btn btn-danger btn-sm delete-pemasukkan-btn" 
+                                                    data-toggle="modal" 
+                                                    data-target="#deletePemasukkanModal" 
+                                                    data-keuangan-id="<?= $data['keuangan_id']; ?>">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
                                             </td>
@@ -79,11 +82,37 @@
         <?php include './resources/views/include/footerSistem.php' ?>
     </div>
 
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal fade" id="deletePemasukkanModal" tabindex="-1" aria-labelledby="deletePemasukkanModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deletePemasukkanModalLabel"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus pemasukkan ini? Tindakan ini tidak dapat dibatalkan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a href="#" id="confirmDeleteBtn" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php include './services/ToastModal.php' ?>
+    <?php include './services/LogoutModal.php' ?>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./resources/js/PemasukkanScript.js"></script>
+    <script src="./resources/js/ToastScript.js"></script>
     <script>
         $(document).ready(function() {
             $('#pemasukkanTable').DataTable();

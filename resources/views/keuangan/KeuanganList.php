@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMIF - Pengeluaran Keuangan</title>
+    <title>HMIF - Keuangan</title>
     <link rel="icon" type="image/png" href="./public/image/HMIF_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -21,7 +21,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Manajemen Pengeluaran</h1>
+                            <h1 class="m-0">Daftar Keuangan</h1>
                         </div>
                     </div>
                 </div>
@@ -31,17 +31,15 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h3 class="card-title">Daftar Pemasukkan</h3>
-                            <a href="index.php?modul=keuangan&fitur=tambah-pengeluaran" class="btn btn-primary btn-sm ml-auto">
-                                <i class="fas fa-plus"></i> Tambah Pengeluaran
-                            </a>
+                            <h3 class="card-title">Daftar Pemasukkan dan Pengeluaran</h3>
                         </div>
                         <div class="card-body">
-                            <table id="pengeluaranTable" class="table table-bordered table-striped">
+                            <table id="keuanganTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Tanggal Pengeluaran</th>
+                                        <th>Tanggal Transaksi</th>
+                                        <th>Jenis Transaksi</th>
                                         <th>Deskripsi</th>
                                         <th>Jumlah</th>
                                         <th>Sumber Dana</th>
@@ -50,21 +48,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($pengeluaran as $index => $data) : ?>
+                                    <?php foreach ($keuangan as $index => $data) : ?>
                                         <tr>
                                             <td><?= $index + 1; ?></td>
                                             <td><?= htmlspecialchars($data['tanggal_transaksi']); ?></td>
+                                            <td><?= htmlspecialchars($data['jenis_transaksi']); ?></td>
                                             <td><?= htmlspecialchars($data['deskripsi']); ?></td>
                                             <td>Rp<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
                                             <td><?= htmlspecialchars($data['sumber_dana']); ?></td>
                                             <td><?= htmlspecialchars($data['kategori']); ?></td>
                                             <td>
-                                                <a href="index.php?modul=keuangan&fitur=detail-pengeluaran&keuangan_id=<?= $data['keuangan_id']; ?>" class="btn btn-success btn-sm">
+                                                <a href="index.php?modul=keuangan&fitur=detail&keuangan_id=<?= $data['keuangan_id']; ?>" class="btn btn-success btn-sm">
                                                     <i class="fas fa-eye"></i> Detail
                                                 </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-pengeluaran-btn" 
+                                                <a href="#" class="btn btn-danger btn-sm delete-pemasukkan-btn" 
                                                     data-toggle="modal" 
-                                                    data-target="#deletePengeluaranModal" 
+                                                    data-target="#deletePemasukkanModal" 
                                                     data-keuangan-id="<?= $data['keuangan_id']; ?>">
                                                     <i class="fas fa-trash"></i> Hapus
                                                 </a>
@@ -83,11 +82,11 @@
     </div>
 
     <!-- Modal Konfirmasi Hapus -->
-    <div class="modal fade" id="deletePengeluaranModal" tabindex="-1" aria-labelledby="deletePengeluaranModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deletePemasukkanModal" tabindex="-1" aria-labelledby="deletePemasukkanModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="deletePengeluaranModalLabel"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h5>
+                    <h5 class="modal-title" id="deletePemasukkanModalLabel"><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -111,11 +110,11 @@
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-    <script src="./resources/js/PengeluaranScript.js"></script>
+    <script src="./resources/js/KeuanganScript.js"></script>
     <script src="./resources/js/ToastScript.js"></script>
     <script>
         $(document).ready(function() {
-            $('#pengeluaranTable').DataTable();
+            $('#pemasukkanTable').DataTable();
         });
     </script>
 </body>

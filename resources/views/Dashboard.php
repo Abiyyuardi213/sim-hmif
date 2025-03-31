@@ -3,7 +3,9 @@ include './config/db_connect.php';
 require_once './app/Models/Role.php';
 require_once './app/Models/Pengguna.php';
 require_once './app/Models/Divisi.php';
+require_once './app/Models/Anggota.php';
 require_once './app/Models/Proker.php';
+require_once './app/Models/Keuangan.php';
 
 $modelPeran = new modelRole();
 $totalPeran = $modelPeran->getTotalRole();
@@ -14,8 +16,22 @@ $totalPengguna = $modelUser->getTotalPengguna();
 $modelDiv = new ModelDivisi();
 $totalDivisi = $modelDiv->getTotalDivisi();
 
+$modelAnggota = new ModelAnggota();
+$totalAnggota = $modelAnggota->getTotalAnggota();
+
 $modelProker = new ModelProker();
 $totalProker = $modelProker->getTotalProker();
+
+$modelKeuangan = new modelKeuangan();
+$totalSaldo = $modelKeuangan->getTotalSaldo();
+
+if ($totalSaldo > 100000) {
+    $saldoColor = 'bg-success'; 
+} elseif ($totalSaldo >= -100000 && $totalSaldo <= 100000) {
+    $saldoColor = 'bg-warning';
+} else {
+    $saldoColor = 'bg-danger';
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -100,6 +116,22 @@ $totalProker = $modelProker->getTotalProker();
 
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
+                            <div class="small-box bg-primary"> <!-- Warna diubah dari bg-success ke bg-primary -->
+                                <div class="inner">
+                                    <h3><?= $totalAnggota; ?></h3>
+                                    <p>Total Anggota</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-user-friends"></i> <!-- Ikon diubah dari fas fa-users ke fas fa-user-friends -->
+                                </div>
+                                <a href="index.php?modul=anggota&fitur=list" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
                                 <h3><?= $totalProker; ?></h3>
@@ -109,6 +141,21 @@ $totalProker = $modelProker->getTotalProker();
                                     <i class="fas fa-tasks"></i>
                                 </div>
                                 <a href="index.php?modul=proker&fitur=list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box <?= $saldoColor; ?>">
+                                <div class="inner">
+                                    <h3>Rp<?= number_format((float)$totalSaldo, 0, ',', '.'); ?></h3>
+                                    <p>Total Saldo</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <a href="index.php?modul=keuangan&fitur=dashboard" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
