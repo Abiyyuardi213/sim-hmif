@@ -50,6 +50,12 @@ switch ($modul) {
         $controllerKeuangan->handleRequestKeuangan($fitur);
         break;
 
+    case 'pengumuman':
+        require_once './app/Http/Controllers/PengumumanController.php';
+        $controllerPengumuman = new controllerPengumuman();
+        $controllerPengumuman->handleRequestPengumuman($fitur);
+        break;
+
     default:
         include './services/404notfound.php';
         break;
