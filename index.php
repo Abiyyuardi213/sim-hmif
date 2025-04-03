@@ -10,6 +10,22 @@ switch ($modul) {
         include './resources/views/home/home.php';
         break;
 
+    case 'about':
+        include './resources/views/home/about.php';
+        break;
+
+    case 'organisasi':
+        include './resources/views/home/organisasi.php';
+        break;
+
+    case 'event':
+        include './resources/views/home/event.php';
+        break;
+    
+    case 'kontak':
+        include './resources/views/home/kontak.php';
+        break;
+
     case 'dashboard':
         include './resources/views/Dashboard.php';
         break;

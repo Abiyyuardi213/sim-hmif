@@ -67,7 +67,7 @@ class controllerPengumuman {
     
             if (!empty($judul) && !empty($isi) && $author_id !== null) {
                 $this->model->createPengumuman($judul, $isi, $author_id, $status);
-                header("Location: index.php?modul=pengumuman&fitur=list");
+                header("Location: index.php?modul=pengumuman&fitur=list&message=Pengumuman Berhasil Ditambahkan");
                 exit;
             } else {
                 $_SESSION['error'] = "Judul, isi, dan author tidak boleh kosong!";
@@ -87,7 +87,7 @@ class controllerPengumuman {
 
             if (!empty($judul) && !empty($isi)) {
                 $this->model->updatePengumuman($pengumuman_id, $judul, $isi, $status);
-                header("Location: index.php?modul=pengumuman&fitur=list");
+                header("Location: index.php?modul=pengumuman&fitur=list&message=Pengumuman Berhasil Diupdate");
                 exit;
             } else {
                 $_SESSION['error'] = "Judul dan isi tidak boleh kosong!";
@@ -102,7 +102,7 @@ class controllerPengumuman {
 
     public function deletePengumuman($pengumuman_id) {
         $this->model->deletePengumuman($pengumuman_id);
-        header("Location: index.php?modul=pengumuman&fitur=list");
+        header("Location: index.php?modul=pengumuman&fitur=list&message=Pengumuman Berhasil Dihapus");
         exit;
     }
 }

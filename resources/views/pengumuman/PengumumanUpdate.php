@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -43,7 +44,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="isi">Isi Pengumuman</label>
-                                    <textarea class="form-control" name="isi" rows="5" required><?= htmlspecialchars($pengumuman['isi']); ?></textarea>
+                                    <textarea name="isi" id="isi" rows="5"><?= htmlspecialchars($pengumuman['isi']); ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
@@ -65,5 +66,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script>
+        // Inisialisasi CKEditor pada textarea dengan id="isi"
+        CKEDITOR.replace('isi', {
+            height: 300,  // Tinggi editor
+        });
+    </script>
 </body>
 </html>

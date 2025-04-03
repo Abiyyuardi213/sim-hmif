@@ -26,6 +26,22 @@ class ModelPengumuman {
         return $result->fetch_assoc();
     }
 
+    public function getLatestPengumuman($limit = 5) {
+        global $conn;
+        $sql = "SELECT * FROM tb_pengumuman ORDER BY tanggal_dibuat DESC LIMIT ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $pengumumans = [];
+        while ($row = $result->fetch_assoc()) {
+            $pengumumans[] = $row;
+        }
+    
+        return $pengumumans;
+    }
+
     public function createPengumuman($judul, $isi, $author_id, $status = 'draft') {
         global $conn;
     

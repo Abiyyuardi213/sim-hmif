@@ -6,6 +6,8 @@
     <title>Detail Pengumuman</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./resources/css/FontConfig.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -30,7 +32,7 @@
                             <h3><?= htmlspecialchars($pengumuman['judul']); ?></h3>
                             <p class="text-muted">Dibuat pada: <?= date('d M Y', strtotime($pengumuman['tanggal_dibuat'])); ?></p>
                             <hr>
-                            <p><?= nl2br(htmlspecialchars($pengumuman['isi'])); ?></p>
+                            <p><?= htmlspecialchars_decode($pengumuman['isi']); ?></p>
                         </div>
                         <div class="card-footer">
                             <a href="index.php?modul=pengumuman&fitur=list" class="btn btn-secondary">Kembali</a>
