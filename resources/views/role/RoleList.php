@@ -74,44 +74,47 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <table id="roleTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Peran</th>
-                                        <th>Nama Peran</th>
-                                        <th>Deskripsi</th>
-                                        <th>Status Peran</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($roles as $index => $role) : ?>
+                            <div class="table-responsive">
+                                <table id="roleTable" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($role['role_id']); ?></td>
-                                            <td><?= htmlspecialchars($role['role_name']); ?></td>
-                                            <td><?= htmlspecialchars($role['role_description']); ?></td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="toggle-status" 
-                                                    data-role-id="<?= $role['role_id']; ?>"
-                                                    <?= $role['role_status'] == 1 ? 'checked' : ''; ?>>
-                                            </td>
-                                            <td class="text-center">
-                                                <a href="index.php?modul=role&fitur=edit&role_id=<?= $role['role_id']; ?>" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-role-btn" 
-                                                    data-toggle="modal" 
-                                                    data-target="#deleteRoleModal" 
-                                                    data-role-id="<?= $role['role_id']; ?>">
-                                                    <i class="fas fa-trash"></i> Hapus
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <!-- <th>ID Peran</th> -->
+                                            <th>Nama Peran</th>
+                                            <th>Deskripsi</th>
+                                            <th>Status Peran</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($roles as $index => $role) : ?>
+                                            <tr>
+                                                <td><?= $index + 1; ?></td>
+                                                <!-- <td><?= htmlspecialchars($role['role_id']); ?></td> -->
+                                                <td><?= htmlspecialchars($role['role_name']); ?></td>
+                                                <td><?= htmlspecialchars($role['role_description']); ?></td>
+                                                <td class="text-center">
+                                                    <input type="checkbox" class="toggle-status" 
+                                                        data-role-id="<?= $role['role_id']; ?>"
+                                                        <?= $role['role_status'] == 1 ? 'checked' : ''; ?>>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="index.php?modul=role&fitur=edit&role_id=<?= $role['role_id']; ?>" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm delete-role-btn" 
+                                                        data-toggle="modal" 
+                                                        data-target="#deleteRoleModal" 
+                                                        data-role-id="<?= $role['role_id']; ?>">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="tablePagination"></div>
                         </div>
                     </div>
                 </div>
@@ -174,6 +177,9 @@
                     alert("Terjadi kesalahan dalam mengubah status.");
                 });
             });
+        });
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
         });
     </script>
 </body>

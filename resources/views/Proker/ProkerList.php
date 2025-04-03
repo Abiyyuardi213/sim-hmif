@@ -37,49 +37,51 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <table id="prokerTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Proker</th>
-                                        <th>Nama Proker</th>
-                                        <th>Tanggal Proker</th>
-                                        <th>Status Proker</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($prokers as $index => $proker) : ?>
+                            <div class="table-responsive">
+                                <table id="prokerTable" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($proker['proker_id']); ?></td>
-                                            <td><?= htmlspecialchars($proker['proker_nama']); ?></td>
-                                            <td><?= htmlspecialchars($proker['proker_tanggal']); ?></td>
-                                            <td class="text-center">
-                                                <?php if ($proker['proker_status'] == 1) : ?>
-                                                    <span class="badge badge-success">Terlaksana</span>
-                                                <?php else : ?>
-                                                    <span class="badge badge-danger">Belum Terlaksana</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <a href="index.php?modul=proker&fitur=detail&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-success btn-sm">
-                                                    <i class="fas fa-eye"></i> Detail
-                                                </a>
-                                                <a href="index.php?modul=proker&fitur=edit&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-proker-btn" 
-                                                    data-toggle="modal" 
-                                                    data-target="#deleteProkerModal" 
-                                                    data-proker-id="<?= $proker['proker_id']; ?>">
-                                                    <i class="fas fa-trash"></i> Hapus
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <!-- <th>ID Proker</th> -->
+                                            <th>Nama Proker</th>
+                                            <th>Tanggal Proker</th>
+                                            <th>Status Proker</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($prokers as $index => $proker) : ?>
+                                            <tr>
+                                                <td><?= $index + 1; ?></td>
+                                                <!-- <td><?= htmlspecialchars($proker['proker_id']); ?></td> -->
+                                                <td><?= htmlspecialchars($proker['proker_nama']); ?></td>
+                                                <td><?= htmlspecialchars($proker['proker_tanggal']); ?></td>
+                                                <td class="text-center">
+                                                    <?php if ($proker['proker_status'] == 1) : ?>
+                                                        <span class="badge badge-success">Terlaksana</span>
+                                                    <?php else : ?>
+                                                        <span class="badge badge-danger">Belum Terlaksana</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="index.php?modul=proker&fitur=detail&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-eye"></i> Detail
+                                                    </a>
+                                                    <a href="index.php?modul=proker&fitur=edit&proker_id=<?= $proker['proker_id']; ?>" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm delete-proker-btn" 
+                                                        data-toggle="modal" 
+                                                        data-target="#deleteProkerModal" 
+                                                        data-proker-id="<?= $proker['proker_id']; ?>">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -120,5 +122,10 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="./resources/js/ProkerScript.js"></script>
     <script src="./resources/js/ToastScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
+    </script>
 </body>
 </html>

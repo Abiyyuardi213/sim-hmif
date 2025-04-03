@@ -139,6 +139,9 @@
             }
             reader.readAsDataURL(event.target.files[0]);
         }
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
     </script>
 </body>
 </html>

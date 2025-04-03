@@ -37,45 +37,47 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <table id="userTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Pengguna</th>
-                                        <th>Nama Pengguna</th>
-                                        <th>Email Pengguna</th>
-                                        <th>Username Pengguna</th>
-                                        <th>Peran Pengguna</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($penggunas as $index => $pengguna) : ?>
+                            <div class="table-responsive">
+                                <table id="userTable" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($pengguna['id_user']); ?></td>
-                                            <td><?= htmlspecialchars($pengguna['nama_user']); ?></td>
-                                            <td><?= htmlspecialchars($pengguna['email_user']); ?></td>
-                                            <td><?= htmlspecialchars($pengguna['username']); ?></td>
-                                            <td><?= htmlspecialchars($pengguna['role_name']); ?></td>
-                                            <td>
-                                                <a href="index.php?modul=pengguna&fitur=detail&id_user=<?= $pengguna['id_user']; ?>" class="btn btn-success btn-sm">
-                                                    <i class="fas fa-eye"></i> Detail
-                                                </a>
-                                                <a href="index.php?modul=pengguna&fitur=edit&id_user=<?= $pengguna['id_user']; ?>" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-user-btn" 
-                                                    data-toggle="modal" 
-                                                    data-target="#deleteUserModal" 
-                                                    data-user-id="<?= $pengguna['id_user']; ?>">
-                                                    <i class="fas fa-trash"></i> Hapus
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <!-- <th>ID Pengguna</th> -->
+                                            <th>Nama Pengguna</th>
+                                            <th>Email Pengguna</th>
+                                            <th>Username Pengguna</th>
+                                            <th>Peran Pengguna</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($penggunas as $index => $pengguna) : ?>
+                                            <tr>
+                                                <td><?= $index + 1; ?></td>
+                                                <!-- <td><?= htmlspecialchars($pengguna['id_user']); ?></td> -->
+                                                <td><?= htmlspecialchars($pengguna['nama_user']); ?></td>
+                                                <td><?= htmlspecialchars($pengguna['email_user']); ?></td>
+                                                <td><?= htmlspecialchars($pengguna['username']); ?></td>
+                                                <td><?= htmlspecialchars($pengguna['role_name']); ?></td>
+                                                <td>
+                                                    <a href="index.php?modul=pengguna&fitur=detail&id_user=<?= $pengguna['id_user']; ?>" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-eye"></i> Detail
+                                                    </a>
+                                                    <a href="index.php?modul=pengguna&fitur=edit&id_user=<?= $pengguna['id_user']; ?>" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm delete-user-btn" 
+                                                        data-toggle="modal" 
+                                                        data-target="#deleteUserModal" 
+                                                        data-user-id="<?= $pengguna['id_user']; ?>">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,5 +118,10 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="./resources/js/PenggunaScript.js"></script>
     <script src="./resources/js/ToastScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
+    </script>
 </body>
 </html>

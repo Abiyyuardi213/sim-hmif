@@ -37,43 +37,45 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <table id="anggotaTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Anggota</th>
-                                        <th>NPM Anggota</th>
-                                        <th>Nama Anggota</th>
-                                        <th>Divisi Anggota</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($anggotas as $index => $anggota) : ?>
+                            <div class="table-responsive">
+                                <table id="anggotaTable" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($anggota['anggota_id']); ?></td>
-                                            <td><?= htmlspecialchars($anggota['anggota_npm']); ?></td>
-                                            <td><?= htmlspecialchars($anggota['anggota_nama']); ?></td>
-                                            <td><?= htmlspecialchars($anggota['divisi_name']); ?></td>
-                                            <td>
-                                                <a href="index.php?modul=anggota&fitur=detail&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-success btn-sm">
-                                                    <i class="fas fa-eye"></i> Detail
-                                                </a>
-                                                <a href="index.php?modul=anggota&fitur=edit&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-anggota-btn" 
-                                                    data-toggle="modal" 
-                                                    data-target="#deleteAnggotaModal" 
-                                                    data-anggota-id="<?= $anggota['anggota_id']; ?>">
-                                                    <i class="fas fa-trash"></i> Hapus
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <!-- <th>ID Anggota</th> -->
+                                            <th>NPM Anggota</th>
+                                            <th>Nama Anggota</th>
+                                            <th>Divisi Anggota</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($anggotas as $index => $anggota) : ?>
+                                            <tr>
+                                                <td><?= $index + 1; ?></td>
+                                                <!-- <td><?= htmlspecialchars($anggota['anggota_id']); ?></td> -->
+                                                <td><?= htmlspecialchars($anggota['anggota_npm']); ?></td>
+                                                <td><?= htmlspecialchars($anggota['anggota_nama']); ?></td>
+                                                <td><?= htmlspecialchars($anggota['divisi_name']); ?></td>
+                                                <td>
+                                                    <a href="index.php?modul=anggota&fitur=detail&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-eye"></i> Detail
+                                                    </a>
+                                                    <a href="index.php?modul=anggota&fitur=edit&anggota_id=<?= $anggota['anggota_id']; ?>" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm delete-anggota-btn" 
+                                                        data-toggle="modal" 
+                                                        data-target="#deleteAnggotaModal" 
+                                                        data-anggota-id="<?= $anggota['anggota_id']; ?>">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,5 +115,10 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="./resources/js/AnggotaScript.js"></script>
     <script src="./resources/js/ToastScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
+    </script>
 </body>
 </html>

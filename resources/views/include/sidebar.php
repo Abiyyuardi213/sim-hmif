@@ -36,6 +36,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <?php if (in_array($_SESSION['role_name'], ['Admin'])) { ?>
                 <li class="nav-item">
                     <a href="index.php?modul=role&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-user-shield"></i>
@@ -48,6 +49,7 @@
                         <p>Pengguna</p>
                     </a>
                 </li>
+                <?php } ?>
                 <li class="nav-item">
                     <a href="index.php?modul=divisi&fitur=list" class="nav-link">
                         <i class="nav-icon fas fa-sitemap"></i>
@@ -66,7 +68,7 @@
                         <p>Proker</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-coins"></i>
                         <p>

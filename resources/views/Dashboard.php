@@ -89,6 +89,7 @@ if ($totalSaldo > 100000) {
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        <?php if (in_array($_SESSION['role_name'], ['Admin'])) { ?>
                         <div class="col-lg-3 col-6">
                             <!-- Card Jumlah Pengguna -->
                             <div class="small-box bg-info">
@@ -116,6 +117,7 @@ if ($totalSaldo > 100000) {
                                 <a href="index.php?modul=pengguna&fitur=list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
+                        <?php } ?>
 
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
@@ -251,6 +253,9 @@ if ($totalSaldo > 100000) {
                 });
                 calendar.render();
             }
+        });
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
         });
     </script>
 </body>

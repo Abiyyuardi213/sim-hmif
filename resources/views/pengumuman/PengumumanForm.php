@@ -71,6 +71,9 @@
         CKEDITOR.replace('isi', {
             height: 300,  // Tinggi editor
         });
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
     </script>
 </body>
 </html>

@@ -39,21 +39,14 @@
                             <?php foreach ($pengumumans as $pengumuman): ?>
                                 <div class="card shadow-lg mb-4">
                                     <div class="card-body">
-                                        <!-- Judul Pengumuman -->
-                                        <h3 class="card-title text-primary"><?= htmlspecialchars($pengumuman['judul']); ?></h3>
-
-                                        <!-- Tanggal Publikasi -->
-                                        <p class="text-muted d-flex align-items-center">
+                                        <h3 class="card-title text-primary fw-bold"><?= htmlspecialchars($pengumuman['judul']); ?></h3>
+                                        <p class="text-muted mb-3">
                                             <i class="fas fa-calendar-alt me-2"></i> 
                                             <?= date('d M Y', strtotime($pengumuman['tanggal_dibuat'])); ?>
                                         </p>
-
-                                        <!-- Isi Pengumuman -->
                                         <p class="card-text">
                                             <?= substr(strip_tags($pengumuman['isi']), 0, 250) . '...'; ?>
                                         </p>
-
-                                        <!-- Status & Tombol Aksi -->
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="badge 
                                                 <?= ($pengumuman['status'] == 'published') ? 'badge-success' : 
@@ -121,5 +114,10 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script src="./resources/js/ToastScript.js"></script>
 <script src="./resources/js/PengumumanScript.js"></script>
+<script>
+    $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
+</script>
 </body>
 </html>

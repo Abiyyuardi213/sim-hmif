@@ -34,44 +34,46 @@
                             <h3 class="card-title">Daftar Pemasukkan dan Pengeluaran</h3>
                         </div>
                         <div class="card-body">
-                            <table id="keuanganTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tanggal Transaksi</th>
-                                        <th>Jenis Transaksi</th>
-                                        <th>Deskripsi</th>
-                                        <th>Jumlah</th>
-                                        <th>Sumber Dana</th>
-                                        <th>Kategori</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($keuangan as $index => $data) : ?>
+                            <div class="table-responsive">
+                                <table id="keuanganTable" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($data['tanggal_transaksi']); ?></td>
-                                            <td><?= htmlspecialchars($data['jenis_transaksi']); ?></td>
-                                            <td><?= htmlspecialchars($data['deskripsi']); ?></td>
-                                            <td>Rp<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
-                                            <td><?= htmlspecialchars($data['sumber_dana']); ?></td>
-                                            <td><?= htmlspecialchars($data['kategori']); ?></td>
-                                            <td>
-                                                <a href="index.php?modul=keuangan&fitur=detail&keuangan_id=<?= $data['keuangan_id']; ?>" class="btn btn-success btn-sm">
-                                                    <i class="fas fa-eye"></i> Detail
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-pemasukkan-btn" 
-                                                    data-toggle="modal" 
-                                                    data-target="#deletePemasukkanModal" 
-                                                    data-keuangan-id="<?= $data['keuangan_id']; ?>">
-                                                    <i class="fas fa-trash"></i> Hapus
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <th>Tanggal Transaksi</th>
+                                            <th>Jenis Transaksi</th>
+                                            <th>Deskripsi</th>
+                                            <th>Jumlah</th>
+                                            <!-- <th>Sumber Dana</th> -->
+                                            <!-- <th>Kategori</th> -->
+                                            <th>Aksi</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($keuangan as $index => $data) : ?>
+                                            <tr>
+                                                <td><?= $index + 1; ?></td>
+                                                <td><?= htmlspecialchars($data['tanggal_transaksi']); ?></td>
+                                                <td><?= htmlspecialchars($data['jenis_transaksi']); ?></td>
+                                                <td><?= htmlspecialchars($data['deskripsi']); ?></td>
+                                                <td>Rp<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
+                                                <!-- <td><?= htmlspecialchars($data['sumber_dana']); ?></td> -->
+                                                <!-- <td><?= htmlspecialchars($data['kategori']); ?></td> -->
+                                                <td>
+                                                    <a href="index.php?modul=keuangan&fitur=detail&keuangan_id=<?= $data['keuangan_id']; ?>" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-eye"></i> Detail
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm delete-pemasukkan-btn" 
+                                                        data-toggle="modal" 
+                                                        data-target="#deletePemasukkanModal" 
+                                                        data-keuangan-id="<?= $data['keuangan_id']; ?>">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,6 +117,9 @@
     <script>
         $(document).ready(function() {
             $('#pemasukkanTable').DataTable();
+        });
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
         });
     </script>
 </body>

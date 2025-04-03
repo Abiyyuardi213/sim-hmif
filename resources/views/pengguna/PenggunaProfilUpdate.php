@@ -66,6 +66,9 @@
                 eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         }
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
     </script>
 </body>
 </html>

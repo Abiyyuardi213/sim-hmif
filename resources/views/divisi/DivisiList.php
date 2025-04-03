@@ -74,44 +74,46 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <table id="divisiTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Divisi</th>
-                                        <th>Nama Divisi</th>
-                                        <th>Deskripsi Divisi</th>
-                                        <th>Status Divisi</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($divisis as $index => $divisi) : ?>
+                            <div class="table-responsive">
+                                <table id="divisiTable" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td><?= $index + 1; ?></td>
-                                            <td><?= htmlspecialchars($divisi['divisi_id']); ?></td>
-                                            <td><?= htmlspecialchars($divisi['divisi_name']); ?></td>
-                                            <td><?= htmlspecialchars($divisi['divisi_description']); ?></td>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="toggle-status" 
-                                                    data-divisi-id="<?= $divisi['divisi_id']; ?>"
-                                                    <?= $divisi['divisi_status'] == 1 ? 'checked' : ''; ?>>
-                                            </td>
-                                            <td>
-                                                <a href="index.php?modul=divisi&fitur=edit&divisi_id=<?= $divisi['divisi_id']; ?>" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm delete-divisi-btn" 
-                                                    data-toggle="modal" 
-                                                    data-target="#deleteDivisiModal" 
-                                                    data-divisi-id="<?= $divisi['divisi_id']; ?>">
-                                                    <i class="fas fa-trash"></i> Hapus
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <!-- <th>ID Divisi</th> -->
+                                            <th>Nama Divisi</th>
+                                            <th>Deskripsi Divisi</th>
+                                            <th>Status Divisi</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($divisis as $index => $divisi) : ?>
+                                            <tr>
+                                                <td><?= $index + 1; ?></td>
+                                                <!-- <td><?= htmlspecialchars($divisi['divisi_id']); ?></td> -->
+                                                <td><?= htmlspecialchars($divisi['divisi_name']); ?></td>
+                                                <td><?= htmlspecialchars($divisi['divisi_description']); ?></td>
+                                                <td class="text-center">
+                                                    <input type="checkbox" class="toggle-status" 
+                                                        data-divisi-id="<?= $divisi['divisi_id']; ?>"
+                                                        <?= $divisi['divisi_status'] == 1 ? 'checked' : ''; ?>>
+                                                </td>
+                                                <td>
+                                                    <a href="index.php?modul=divisi&fitur=edit&divisi_id=<?= $divisi['divisi_id']; ?>" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm delete-divisi-btn" 
+                                                        data-toggle="modal" 
+                                                        data-target="#deleteDivisiModal" 
+                                                        data-divisi-id="<?= $divisi['divisi_id']; ?>">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -174,6 +176,10 @@
                     alert("Terjadi kesalahan dalam mengubah status.");
                 });
             });
+        });
+
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
         });
     </script>
 </body>

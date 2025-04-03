@@ -117,6 +117,9 @@
         $(document).ready(function() {
             $('#pemasukkanTable').DataTable();
         });
+        $(document).ready(function () {
+            $('[data-widget="treeview"]').Treeview('init');
+        });
     </script>
 </body>
 </html>
